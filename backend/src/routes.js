@@ -1,7 +1,8 @@
 const express = require('express');
+const SessionController = require('./controllers/SessionController')
 
 const routes = express.Router();
 
-routes.get('/', (req, res) => res.json({ message: "Hello World" }));
+routes.get('/sessions', SessionController.store);
 
 module.exports = routes;
