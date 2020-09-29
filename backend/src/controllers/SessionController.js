@@ -2,12 +2,6 @@ const User = require('../models/User');;
 
 // index, show, store, update, delete
 module.exports = {
-    index() {
-
-    },
-    show() {
-
-    },
     async store(req, res) {
         const { email } = req.body;
 
@@ -20,10 +14,4 @@ module.exports = {
             .status(201)
             .json({ message: 'User created', user });
     },
-    update() {
-
-    },
-    delete() {
-
-    }
 }
