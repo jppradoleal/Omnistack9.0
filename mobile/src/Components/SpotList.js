@@ -12,7 +12,7 @@ function SpotList({ tech, navigation }) {
             const response = await api.get('/spots', {
                 params: {tech}
             })
-            setSpots(response.data)
+            setSpots(response.data);
         }
         loadSpots();
     }, []);
