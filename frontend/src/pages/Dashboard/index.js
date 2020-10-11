@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import socketio from 'socket.io-client';
+import moment from 'moment';
 
 import api from '../../services/api';
 
@@ -49,7 +50,7 @@ export default function Dashboard() {
                 {requests.map(request => (
                     <li key={request._id}>
                         <p>
-                            <strong>{request.user.email}</strong> está solicitando uma reserva em <strong>{request.spot.company}</strong> para a data: <strong>{request.date}</strong>
+                            <strong>{request.user.email}</strong> está solicitando uma reserva em <strong>{request.spot.company}</strong> para <strong>{moment(request.date, 'YYYY/MM/DD').format('DD/MM/YYYY').toString()}</strong>
                         </p>
                         <button 
                             className="accept" 
