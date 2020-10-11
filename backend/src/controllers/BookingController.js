@@ -1,21 +1,23 @@
+const { validationResult } = require('express-validator');
+
 const Booking = require('../models/Booking');
 const Spot = require('../models/Spot');
 const User = require('../models/User');
 
 module.exports = {
     async store(req, res) {
+        const errors = validationResult(req);
+
+        if(!errors.isEmpty())
+            return res.status(400).json({errors: errors.array()});
+
         const { user_id } = req.headers;
         const { spot_id } = req.params;
         const { date } = req.body;
 
-        let message = '';
-
-        message = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/
-                    .test(date) ? '' : 'Date must be on DD-MM-YYYY or DD/MM/YYYY';
-
         const spot_owner = (await Spot.findById(spot_id)).user;
         const user = await User.findById(user_id);
-        if(user && !message.length) {
+        if(user) {
             if(user_id != spot_owner) {
                 
                 const booking = await Booking.create({

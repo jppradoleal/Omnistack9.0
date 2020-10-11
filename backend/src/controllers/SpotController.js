@@ -1,3 +1,5 @@
+const { validationResult } = require('express-validator');
+
 const Spot = require('../models/Spot');
 const User = require('../models/User');
 
@@ -11,6 +13,11 @@ module.exports = {
         return res.json(spots);
     },
     async store(req, res) {
+        const errors = validationResult(req);
+        
+        if(!errors.isEmpty())
+        return res.status(400).json({errors: errors.array()});
+
         const { filename } = req.file;
         const { company, techs, price } = req.body;
 
