@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import React, { useState } from 'react';
 import { SafeAreaView, Text, TextInput, TouchableOpacity, StyleSheet, Platform, Alert } from 'react-native';
+import DatePicker from 'react-native-datepicker';
 
 import api from '../services/api';
 
@@ -29,15 +30,34 @@ export default function Book({ navigation }) {
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.label}>SUA DATA DE INTERESSE *</Text>
-            <TextInput
+            <DatePicker
+                date={date}
+                mode="date"
                 style={styles.input}
                 placeholder="Qual data você quer reservar?"
-                placeholderTextColor="#999"
-                autoCapitalize="words"
-                autoCorrect={false}
-                value={date}
-                onChangeText={setDate}
+                format="YYYY-MM-DD"
+                confirmBtnText="Confirmar"
+                cancelBtnText="Cancelar"
+                onDateChange={setDate}
+                customStyles={{
+                    dateInput: {
+                        borderColor: 'rgba(0, 0, 0, 0)',
+                        alignItems: 'flex-start',
+                    },
+                    placeholderText: {
+                        color: '#999',
+                        fontSize: 16,
+                    },
+                    dateText: {
+                        fontSize: 16,
+                        color: '#444'
+                    },
+                    dateIcon: {
+                        display: 'none',
+                    }
+                }}
             />
+
             <TouchableOpacity style={styles.button} onPress={handleSubmit}>
                 <Text style={styles.buttonText}>Encontrar spots</Text>
             </TouchableOpacity>
@@ -62,6 +82,7 @@ const styles = StyleSheet.create({
     },
 
     input: {
+        width: '100%',
         borderWidth: 1,
         borderColor: "#ddd",
         paddingHorizontal: 20,

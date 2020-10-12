@@ -4,7 +4,9 @@ import React from 'react';
 import Routes from './src/routes';
 
 LogBox.ignoreLogs([
-  'Unrecognized WebSocket'
+  'Unrecognized WebSocket',
+  'componentWillReceiveProps',
+  'DatePickerAndroid'
 ])
 
 export default function App() {
