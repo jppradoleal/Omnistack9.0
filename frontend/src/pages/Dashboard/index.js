@@ -12,7 +12,7 @@ export default function Dashboard() {
     const [requests, setRequests] = useState([]);
 
     const user_id = localStorage.getItem('user');
-    const socket = useMemo(() => socketio('http://localhost:8080', {
+    const socket = useMemo(() => socketio('https://omnistack9-joaop.herokuapp.com', {
         query: { user_id }
     }), [user_id]);
 
